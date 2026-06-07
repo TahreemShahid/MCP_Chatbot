@@ -91,14 +91,6 @@ class UploadResponse(BaseModel):
     message: str
 
 
-@app.get("/")
-def root() -> dict[str, str]:
-    return {
-        "service": "Agentic Document Assistant",
-        "docs": "/docs",
-        "health": "/health",
-    }
-
 
 @app.get("/health")
 def health() -> dict[str, str]:

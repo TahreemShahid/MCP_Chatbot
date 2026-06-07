@@ -1,0 +1,18 @@
+{
+  "description": "Full end-to-end evaluation (evaluate_chatbot.py) on synthetic PDF, 5 Q&A tests",
+  "date": "2026-06-07",
+  "environment": "Windows, Python 3.13, local API",
+  "upload_latency_sec": 3.274,
+  "accuracy_pct": 100.0,
+  "tests_passed": 5,
+  "tests_total": 5,
+  "avg_chat_latency_sec": 2.147,
+  "min_chat_latency_sec": 1.175,
+  "max_chat_latency_sec": 4.916,
+  "retrieval_only": {
+    "note": "Run with --retrieval-only to benchmark MCP document_search without LLM calls",
+    "retrieval_accuracy_pct": 100.0,
+    "avg_retrieval_latency_sec": 0.557,
+    "upload_latency_sec": 0.618
+  }
+}

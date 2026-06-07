@@ -1,0 +1,29 @@
+# Secrets
+.env
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Runtime data
+vector_store/
+backend/uploads/*
+!backend/uploads/.gitkeep
+eval_results.json
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db

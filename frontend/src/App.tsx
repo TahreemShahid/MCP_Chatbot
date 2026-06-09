@@ -5,6 +5,7 @@ import {
   streamChat,
   uploadPdf,
 } from "./api";
+import { parseMarkdown } from "./markdown";
 
 const GREETING: Message = {
   id: "greeting",
@@ -110,7 +111,7 @@ export default function App() {
           <h1>MCP Document Assistant</h1>
           <p>LangChain agent · FastAPI · MCP tools · FAISS retrieval</p>
         </div>
-        <button type="button" className="btn-secondary" onClick={resetChat}>
+        <button type="button" className="btn-primary" onClick={resetChat}>
           New conversation
         </button>
       </header>
@@ -144,7 +145,11 @@ export default function App() {
           <div key={m.id} className={`bubble-row ${m.role}`}>
             {m.role === "assistant" && <div className="avatar bot">✦</div>}
             <div className={`bubble ${m.role}`}>
-              {m.content || (busy && m.role === "assistant" ? "…" : "")}
+              {m.content
+                ? parseMarkdown(m.content)
+                : busy && m.role === "assistant"
+                  ? "…"
+                  : ""}
             </div>
             {m.role === "user" && <div className="avatar user">You</div>}
           </div>
@@ -158,7 +163,11 @@ export default function App() {
           placeholder={sessionId ? "Ask about your document…" : "Upload a PDF first…"}
           disabled={!sessionId || busy}
         />
-        <button type="submit" disabled={!sessionId || busy || !input.trim()}>
+        <button
+          type="submit"
+          className="btn-primary"
+          disabled={!sessionId || busy || !input.trim()}
+        >
           Send
         </button>
       </form>

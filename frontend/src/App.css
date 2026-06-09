@@ -55,15 +55,31 @@ body {
   font-size: 0.82rem;
 }
 
-.btn-secondary {
-  border: 1px solid var(--border);
-  background: var(--accent);
+.btn-primary {
+  border: none;
+  background: linear-gradient(to right, #9333ea, #4f46e5);
   color: #fff;
   border-radius: 999px;
   padding: 0.45rem 1rem;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
+  box-shadow:
+    0 4px 14px rgba(147, 51, 234, 0.4),
+    0 0 24px rgba(79, 70, 229, 0.25);
+  transition: box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  filter: brightness(1.08);
+  box-shadow:
+    0 6px 20px rgba(147, 51, 234, 0.5),
+    0 0 32px rgba(79, 70, 229, 0.35);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .status {
@@ -110,6 +126,7 @@ body {
   flex-direction: column;
   gap: 0.75rem;
   margin: 0.5rem 0 1rem;
+  padding-bottom: 100px;
 }
 
 .bubble-row {
@@ -187,18 +204,15 @@ body {
   outline: none;
 }
 
-.composer button {
-  border: none;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 999px;
+.composer .btn-primary {
   padding: 0.55rem 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
 }
 
-.composer button:disabled,
 .composer input:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.bubble strong {
+  font-weight: 700;
 }

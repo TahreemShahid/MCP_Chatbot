@@ -6,13 +6,32 @@ export type Message = {
   content: string;
 };
 
+const MAX_UPLOAD_MB = 50;
+
+export function maxUploadBytes(): number {
+  return MAX_UPLOAD_MB * 1024 * 1024;
+}
+
 export async function uploadPdf(file: File): Promise<{ session_id: string; message: string }> {
+  if (file.size > maxUploadBytes()) {
+    throw new Error(
+      `File is too large (${(file.size / (1024 * 1024)).toFixed(1)} MB). Maximum is ${MAX_UPLOAD_MB} MB.`,
+    );
+  }
+
   const form = new FormData();
   form.append("file", file);
   const response = await fetch(`${API_BASE}/upload`, { method: "POST", body: form });
   if (!response.ok) {
     const body = await response.json().catch(() => ({ detail: response.statusText }));
-    throw new Error(body.detail ?? "Upload failed");
+    const detail = body.detail;
+    const message =
+      typeof detail === "string"
+        ? detail
+        : Array.isArray(detail)
+          ? detail.map((d: { msg?: string }) => d.msg).filter(Boolean).join("; ")
+          : "Upload failed";
+    throw new Error(message);
   }
   return response.json();
 }

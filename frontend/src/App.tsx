@@ -136,7 +136,11 @@ export default function App() {
               if (file) void handleUpload(file);
             }}
           />
-          <span>{uploading ? "Indexing…" : "Attach PDF"}</span>
+          <span>
+            {uploading
+              ? "Indexing PDF (large files may take a few minutes)…"
+              : "Attach PDF (max 50 MB)"}
+          </span>
         </label>
       </section>
 
